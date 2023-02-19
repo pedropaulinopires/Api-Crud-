@@ -13,10 +13,10 @@ import repository.Crud;
 
 public class DAO<Entity> implements Crud<Entity> {
 	/** create connection data base */
-	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("P");
+	private EntityManagerFactory emf = null;
 
 	public DAO(String persistenceUnitName) {
-
+		this.emf = Persistence.createEntityManagerFactory(persistenceUnitName);
 	}
 
 	public EntityManagerFactory getEmf() {
@@ -34,7 +34,7 @@ public class DAO<Entity> implements Crud<Entity> {
 	/* methods data transfer object */
 
 	public void addEntityDataBase(Entity entity) {
-		// star connection
+		// start connection
 		EntityManager em = getConnection();
 		try {
 			// transactions
@@ -53,7 +53,7 @@ public class DAO<Entity> implements Crud<Entity> {
 	}
 
 	public void removeEntityDataBase(Entity entity, Long id) {
-		// star connection
+		// start connection
 		EntityManager em = getConnection();
 		try {
 			// transactions
